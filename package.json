@@ -1,0 +1,19 @@
+{
+  "name": "markov",
+  "version": "1.0.0",
+  "description": "markov machine exercise",
+  "main": "makeText.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lcarinad/markov-machine.git"
+  },
+  "author": "Lauren DeLago",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lcarinad/markov-machine/issues"
+  },
+  "homepage": "https://github.com/lcarinad/markov-machine#readme"
+}
