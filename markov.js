@@ -15,29 +15,33 @@ class MarkovMachine {
    *  {"the": ["cat", "hat"], "cat": ["in"], "in": ["the"], "hat": [null]} */
 
   makeChains(words) {
-    let obj = {};
+    let chainsObj = {};
 
-    for (let i = 0; i < words.length - 1; i++) {
+    for (let i = 0; i <= words.length - 1; i++) {
       let currentWord = words[i];
       let nextWord = words[i + 1];
 
-      if (!obj[currentWord]) {
-        obj[currentWord] = [];
+      if (!chainsObj[currentWord]) {
+        chainsObj[currentWord] = [];
       }
-      obj[currentWord].push(nextWord);
-      if (words[i] === words[words.length - 1]) {
-        obj[currentWord].push(null);
-      }
+      chainsObj[currentWord].push(nextWord || null);
     }
-    // let lastWord = words[words.length - 1];
-    // obj[lastWord] = null;
-    console.log(obj);
+    this.chainsObj = chainsObj;
   }
   /** return random text from chains */
-
-  makeText(numWords = 100) {
-    // TODO
+  static choice(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+  makeText(numWords = 20) {
+    let keys = Object.keys(this.chainsObj);
+    let key = MarkovMachine.choice(keys);
+    let ranOutput = [];
+    while (ranOutput.length < numWords && key !== null) {
+      ranOutput.push(key);
+      key = MarkovMachine.choice(keys);
+    }
+    return ranOutput.join(" ");
   }
 }
-let mm = new MarkovMachine("the cat in the hat");
-console.log(mm);
+let mm = new MarkovMachine("the cat");
+console.log(mm.makeText());
