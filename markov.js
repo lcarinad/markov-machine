@@ -25,9 +25,12 @@ class MarkovMachine {
         obj[currentWord] = [];
       }
       obj[currentWord].push(nextWord);
+      if (words[i] === words[words.length - 1]) {
+        obj[currentWord].push(null);
+      }
     }
-    let lastWord = words[words.length - 1];
-    obj[lastWord] = null;
+    // let lastWord = words[words.length - 1];
+    // obj[lastWord] = null;
     console.log(obj);
   }
   /** return random text from chains */
