@@ -1,6 +1,5 @@
 /** Textual markov chain generator */
-
-class MarkovMachine {
+module.exports = class MarkovMachine {
   /** build markov machine; read in text.*/
 
   constructor(text) {
@@ -42,6 +41,4 @@ class MarkovMachine {
     }
     return ranOutput.join(" ");
   }
-}
-let mm = new MarkovMachine("the cat");
-console.log(mm.makeText());
+};
