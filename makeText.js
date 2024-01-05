@@ -1,10 +1,10 @@
 /** Command-line tool to generate Markov text. */
 
 const fs = require("fs");
+const axios = require("axios");
 const MarkovMachine = require("./markov");
-const filePath = process.argv[2];
 
-function readFile(path) {
+function readFile(filePath) {
   fs.readFile(filePath, "utf-8", function (err, data) {
     if (err) {
       console.error("This error was received:", err);
@@ -15,9 +15,21 @@ function readFile(path) {
     console.log(mm.makeText(20));
   });
 }
-//read file at url
-readFile(filePath);
 
-function readUrl(url) {
-  const axios = require("axios");
+async function readUrl(url) {
+  try {
+    let resp = await axios.get(url);
+    let mm = new MarkovMachine(resp.data);
+    console.log(mm.makeText(20));
+  } catch (err) {
+    console.error(`Error fetching ${url}: ${err}`);
+    process.exit(1);
+  }
+}
+let filePath = process.argv[2];
+
+if (!filePath.includes(".com")) {
+  readFile(filePath);
+} else {
+  readUrl(filePath);
 }
